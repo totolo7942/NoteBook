@@ -1,3 +1,4 @@
+package pe.notebook;
 
 public class PerfectIntegerSerarchMain {
     public static void main(String[] args) {
