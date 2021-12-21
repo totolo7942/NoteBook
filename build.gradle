@@ -13,6 +13,10 @@ repositories {
     mavenLocal()
 }
 
+sourceCompatibility=JavaVersion.VERSION_17
+targetCompatibility=JavaVersion.VERSION_17
+
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'org.codehaus.groovy:groovy-all:3.0.5'
