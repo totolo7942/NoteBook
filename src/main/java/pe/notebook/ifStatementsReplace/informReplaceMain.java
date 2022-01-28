@@ -2,7 +2,7 @@ package pe.notebook.ifStatementsReplace;
 
 import java.util.*;
 
-public class iforReplaceMain {
+public class informReplaceMain {
 
     public static void main(String[] args) {
         //1. Factory class
@@ -12,11 +12,11 @@ public class iforReplaceMain {
         System.out.println(operation.apply( 1, 2));
 
         //2. enum class
-        Calcurator calcurattor = new Calcurator();
-        System.out.println(calcurattor.calcuator(Operator.ADD));
+        Calcurator calibrator = new Calcurator();
+        System.out.println(calibrator.calcuator(Operator.ADD));
 
         //3. command pattern
-        System.out.println(calcurattor.calcurator(new AddCommand( 1, 3)));
+        System.out.println(calibrator.calcurator(new AddCommand( 1, 3)));
 
         //4. advance Rule
         Expression expression = new Expression(5 , 5, Operator.ADD);

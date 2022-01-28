@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // class to innerclass call
 @Suite.SuiteClasses({ Expression.class, RuleEngine.class})
-class iforReplaceMainTest {
+class informReplaceMainTest {
 
     @Test
     void testRuleBaseSuccessTest(){
