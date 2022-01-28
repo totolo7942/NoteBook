@@ -52,6 +52,7 @@ class RuleEngine {
                 .orElseThrow(() -> new IllegalArgumentException("expression not matches"));
         return rule.getResult();
     }
+
 }
 
 
@@ -146,12 +147,15 @@ class AddCommand implements Command{
     public int executor() {
         return a + b;
     }
+
+
 }
 
 
 
 interface Operation {
     int apply(int a, int b);
+
 }
 
 class Addtions implements Operation {
@@ -159,6 +163,8 @@ class Addtions implements Operation {
     public int apply(int a, int b) {
         return a + b;
     }
+
+
 }
 
 class OperationFactory {
