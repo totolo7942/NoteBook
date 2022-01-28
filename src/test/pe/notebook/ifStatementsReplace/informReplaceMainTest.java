@@ -1,5 +1,7 @@
 package pe.notebook.ifStatementsReplace;
 
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.Suite;
 
@@ -11,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 // class to innerclass call
 @Suite.SuiteClasses({ Expression.class, RuleEngine.class})
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) // _를 space로 표시한다.
 class informReplaceMainTest {
 
     @Test
