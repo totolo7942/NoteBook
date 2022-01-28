@@ -5,7 +5,10 @@ import org.junit.runners.Suite;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//Documents
 //checked : https://www.baeldung.com/java-search-enum-values
+//https://junit.org/junit5/docs/snapshot/user-guide/
+
 // class to innerclass call
 @Suite.SuiteClasses({ Expression.class, RuleEngine.class})
 class iforReplaceMainTest {
