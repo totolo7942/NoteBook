@@ -53,6 +53,10 @@ class RuleEngine {
         return rule.getResult();
     }
 
+    public List<Rule> getRules(){
+        return rules;
+    }
+
 }
 
 
