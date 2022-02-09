@@ -9,9 +9,9 @@ public class VoucherRandomCodes {
         StringBuilder sb = new StringBuilder();
         Random random = new Random(System.currentTimeMillis());
 
-        CodeConfig config = CodeConfig.length(10);
+//        CodeConfig config = CodeConfig.length(10);
 //        CodeConfig config = CodeConfig.length(8).withCharset(CodeConfig.Charset.NUMBERS);
-//        CodeConfig config = CodeConfig.length(8).withPrefix("TE-").withPostfix("-ST");
+        CodeConfig config = CodeConfig.length(8).withPrefix("TE-").withPostfix("-ST");
 //        CodeConfig config = CodeConfig.pattern("##-###-##");
 
         char[] chars = config.getCharset().toCharArray();
