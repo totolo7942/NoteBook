@@ -12,11 +12,11 @@ public class informReplaceMain {
         System.out.println(operation.apply( 1, 2));
 
         //2. enum class
-        Calcurator calibrator = new Calcurator();
-        System.out.println(calibrator.calcuator(Operator.ADD));
+        Calculator calibrator = new Calculator();
+        System.out.println(calibrator.calculator(Operator.ADD));
 
         //3. command pattern
-        System.out.println(calibrator.calcurator(new AddCommand( 1, 3)));
+        System.out.println(calibrator.calculator(new AddCommand( 1, 3)));
 
         //4. advance Rule
         Expression expression = new Expression(5 , 5, Operator.ADD);
@@ -162,7 +162,7 @@ interface Operation {
 
 }
 
-class Addtions implements Operation {
+class Addition implements Operation {
     @Override
     public int apply(int a, int b) {
         return a + b;
@@ -174,7 +174,7 @@ class Addtions implements Operation {
 class OperationFactory {
     static Map<String, Operation> operationMap = new HashMap<>();
     static  {
-        operationMap.put("add", new Addtions());
+        operationMap.put("add", new Addition());
     }
 
     public static Optional<Operation> getOperation(final String opt) {

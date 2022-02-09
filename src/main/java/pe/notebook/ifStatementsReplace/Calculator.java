@@ -1,11 +1,11 @@
 package pe.notebook.ifStatementsReplace;
 
-public class Calcurator {
-    public int calcuator(Operator operator) {
+public class Calculator {
+    public int calculator(Operator operator) {
         return operator.apply(1 , 2);
     }
 
-    public int calcurator(Command command) {
+    public int calculator(Command command) {
         return command.executor();
     }
 }
