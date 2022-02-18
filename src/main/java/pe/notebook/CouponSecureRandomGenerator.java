@@ -2,7 +2,6 @@ package pe.notebook;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.Serial;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.LinkedHashSet;
@@ -66,7 +65,7 @@ class CouponGenerator {
 }
 
 class CouponGenerateError extends Exception {
-    @Serial
+//    @Serial
     private static final long serialVersionUID = -1653304954179913425L;
 
     public CouponGenerateError(String message) {
@@ -164,10 +163,11 @@ class Coupon {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Coupon c)) {
+        if (!(o instanceof Coupon)) {
             return false;
         }
 
+        Coupon c = (Coupon) o;
         return code.equals(c.code);
     }
 
