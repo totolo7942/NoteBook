@@ -2,6 +2,9 @@ package pe.notebook.ifStatementsReplace;
 
 import java.util.*;
 
+/**
+ * AVoid if-else , swtich Pattern
+ */
 public class informReplaceMain {
 
     public static void main(String[] args) {
