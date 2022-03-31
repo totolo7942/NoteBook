@@ -5,24 +5,44 @@ plugins {
     id 'java'
     id 'me.champeau.jmh' version '0.6.6' //JMH Plugin
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'org.springframework.boot' version '2.6.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+
 }
 
 group 'net.notebook'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
+
 }
 
-sourceCompatibility=JavaVersion.VERSION_17
-targetCompatibility=JavaVersion.VERSION_17
+ext['log4j2.version'] = '2.17.1'
 
+sourceCompatibility=JavaVersion.VERSION_11
+targetCompatibility=JavaVersion.VERSION_11
+
+configurations.all {
+    resolutionStrategy {
+        eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'org.codehaus.groovy') {
+                details.useVersion('3.0.10')
+            }
+        }
+    }
+}
 
 dependencies {
     jmh 'commons-io:commons-io:2.4'
     jmh 'org.openjdk.jmh:jmh-core:0.9'
     jmh 'org.openjdk.jmh:jmh-generator-annprocess:0.9'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'com.h2database:h2:1.4.200'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'org.codehaus.groovy:groovy-all:3.0.5'
@@ -31,8 +51,24 @@ dependencies {
     implementation group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
 
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    //spock
+    implementation 'org.codehaus.groovy:groovy:3.0.10'
+    testImplementation "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules
+    testImplementation platform("org.spockframework:spock-bom:2.1-groovy-3.0")
+    testImplementation("org.spockframework:spock-core") {
+        exclude group: 'org.codehaus.groovy'
+    }
+
+    // optional dependencies for using Spock
+    testImplementation "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
+    testRuntimeOnly 'net.bytebuddy:byte-buddy:1.12.8' // allows mocking of classes (in addition to interfaces)
+    testRuntimeOnly "org.objenesis:objenesis:3.2"      // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+
+    // dependencies used by examples in this project
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
@@ -43,9 +79,6 @@ patchPluginXml {
     changeNotes = """
       Add change notes here.<br>
       <em>most HTML tags may be used</em>"""
-}
-test {
-    useJUnitPlatform()
 }
 
 //JMH BencheMarking Tools Use (디렉토리가 다르게 설정되어 있어야됨)
@@ -81,4 +114,14 @@ jmh {
 //    jmhVersion = '1.29' // Specifies JMH version
     includeTests = true // Allows to include test sources into generate JMH jar, i.e. use it when benchmarks depend on the test classes.
     duplicateClassesStrategy = DuplicatesStrategy.WARN // Strategy to apply when encountring duplicate classes during creation of the fat jar (i.e. while executing jmhJar task)
+}
+
+
+//tasks.withType(GroovyCompile).configureEach {
+//    options.forkOptions.jvmArgs << '-Dspock.iKnowWhatImDoing.disableGroovyVersionCheck=true'    //ok
+//}
+
+test {
+    systemProperty "spock.iKnowWhatImDoing.disableGroovyVersionCheck", "true"   //doesn't work
+    useJUnitPlatform()
 }
